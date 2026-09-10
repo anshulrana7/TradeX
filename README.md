@@ -7,19 +7,20 @@ TradeX is a full-stack trading dashboard prototype with a public landing site, a
 ### Landing page
 <img width="1917" height="965" alt="image" src="https://github.com/user-attachments/assets/0f830a02-f49e-4ad3-8498-7867708ef4ee" />
 
-###![TradeX landing page](frontend/public/media/images/homeHero.png)
+
 
 ### Dashboard branding
 
-![TradeX dashboard](frontend/public/media/images/console.png)
+<img width="1917" height="962" alt="image" src="https://github.com/user-attachments/assets/10aa826b-c415-41bb-8978-b1281bd44892" />
+
 
 ### Sign-up experience
-
-![TradeX sign-up page](frontend/public/media/images/signup.png)
+<img width="1917" height="983" alt="image" src="https://github.com/user-attachments/assets/1b49db22-0da2-41c4-adfa-853293533f60" />
 
 ### Trading workspace
 
-![TradeX trading workspace](frontend/public/media/images/kite.png)
+<img width="1917" height="986" alt="image" src="https://github.com/user-attachments/assets/8ff01c12-670d-4f97-9647-e2ac3669bcea" />
+
 
 The repository also contains the dashboard's live UI under `dashboard/src/components` and the landing experience under `frontend/src/landing_page`.
 
