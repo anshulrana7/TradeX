@@ -12,7 +12,8 @@ TradeX is a full-stack trading dashboard prototype with a public landing site, a
 ### Dashboard branding
 
 <img width="1917" height="962" alt="image" src="https://github.com/user-attachments/assets/10aa826b-c415-41bb-8978-b1281bd44892" />
-![Uploading image.png…]()
+<img width="1912" height="962" alt="image" src="https://github.com/user-attachments/assets/66f4acc9-cbc7-40f4-be3d-01789e575497" />
+
 
 
 
