@@ -9,14 +9,26 @@ const { HoldingsModel } = require("./model/HoldingsModel");
 
 const { PositionsModel } = require("./model/PositionsModel");
 const { OrdersModel } = require("./model/OrdersModel");
+const { authRouter } = require("./routes/auth");
 
 const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGO_URL;
+const allowedOrigins = [
+  process.env.FRONTEND_URL || "http://localhost:3000",
+  process.env.DASHBOARD_URL || "http://localhost:3001",
+];
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error("Origin is not allowed."));
+  },
+  credentials: true,
+}));
 app.use(bodyParser.json());
+app.use("/auth", authRouter);
 
 /*app.get("/addHoldings", async (req, res) => {
   let tempHoldings = [
@@ -253,8 +265,12 @@ app.post("/newOrder", async (req, res) => {
   res.send("Order saved!");
 });
 
-app.listen(PORT, () => {
-  console.log("App started!");
-  mongoose.connect(uri);
-  console.log("DB started!");
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log("App started!");
+    mongoose.connect(uri);
+    console.log("DB started!");
+  });
+}
+
+module.exports = { app };

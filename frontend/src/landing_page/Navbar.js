@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function Navbar() {
+  const dashboardUrl = process.env.REACT_APP_DASHBOARD_URL || "http://localhost:3001";
+  const signinUrl = "/signin";
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:3002";
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    fetch(`${apiUrl}/auth/me`, { credentials: "include" })
+      .then((response) => {
+        if (!response.ok) throw new Error("Invalid token");
+        setIsAuthenticated(true);
+      })
+      .catch(() => {
+        setIsAuthenticated(false);
+      });
+  }, [apiUrl]);
+
+  const handleLogout = () => {
+    fetch(`${apiUrl}/auth/logout`, { method: "POST", credentials: "include" })
+      .finally(() => window.location.assign(signinUrl));
+  };
+
   return (
     <nav
-      className="navbar navbar-expand-lg border-bottom"
+      className="navbar navbar-expand-lg sticky-top border-bottom"
       style={{ backgroundColor: "#FFF" }}
     >
       <div className="container p-2">
@@ -29,9 +50,28 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <form className="d-flex" role="search">
             <ul className="navbar-nav mb-lg-0">
+              {isAuthenticated && (
+                <>
+                  <li className="nav-item">
+                    <a className="nav-link active" href={dashboardUrl} target="_self">
+                      Dashboard
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <button className="nav-link active border-0 bg-transparent" type="button" onClick={handleLogout}>
+                      Logout
+                    </button>
+                  </li>
+                </>
+              )}
               <li className="nav-item">
                 <Link className="nav-link active" to="/signup">
                   Signup
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link active" to="/signin">
+                  Sign in
                 </Link>
               </li>
               <li className="nav-item">
